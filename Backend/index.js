@@ -160,7 +160,7 @@ const AlunoSchema = new mongoose.Schema({
   alergia: String,
 });
 
-const Aluno = mongoose.model('Aluno', AlunoSchema);
+const Aluno = mongoose.model('Alunos', AlunoSchema);
 
 // Endpoint para cadastrar um novo aluno
 app.post('/alunos', async (req, res) => {
@@ -208,9 +208,9 @@ const ProfessorSchema = new mongoose.Schema({
   cidade: String,
   bairro: String,
   celular: String,
-});
+}, { collection: 'professores' });  // Especifica o nome da coleção
 
-const Professor = mongoose.model('Professor', ProfessorSchema);
+const Professor = mongoose.model('Professores', ProfessorSchema);
 
 // Endpoint para cadastrar um novo professor
 app.post('/professores', async (req, res) => {
