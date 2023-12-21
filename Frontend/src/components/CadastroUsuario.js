@@ -29,7 +29,7 @@ function CadastroUsuario() {
     // Lógica para cadastrar usuário no backend (substituir com a chamada real à API)
     try {
       // Substituir 'url_do_backend/cadastro' com a URL real de cadastro
-      const response = await axios.post('http://localhost:3001/usuarios/cadastro', {
+      const response = await axios.post('https://projeto-escolar-api.onrender.com/usuarios/cadastro', {
       nome,
       email,
       senha,

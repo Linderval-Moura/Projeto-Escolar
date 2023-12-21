@@ -13,8 +13,8 @@ const cors = require('cors');
 const app = express();
 
 const allowedOrigins = ['http://localhost:3000',
-                        'https://reconhecimento-de-placas.vercel.app', 
-                        'https://reconhecimento-de-placas.vercel.app/consulta', 
+                        'https://projeto-escolar-eta.vercel.app/', 
+                        'https://projeto-escolar-eta.vercel.app/cadastrousuario', 
                         'https://reconhecimento-de-placas.vercel.app/relatorio'
 ];
 

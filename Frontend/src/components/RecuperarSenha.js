@@ -21,7 +21,7 @@ function RecuperarSenha() {
     // Lógica para recuperar senha no backend (substituir com a chamada real à API)
     try {
       // Substituir 'url_do_backend/recuperar-senha' com a URL real para recuperar senha
-      const response = await axios.post('http://localhost:3001/usuarios/recuperar-senha', {
+      const response = await axios.post('https://projeto-escolar-api.onrender.com/usuarios/recuperar-senha', {
         email,
       });
 
