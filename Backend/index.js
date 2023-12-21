@@ -14,8 +14,7 @@ const app = express();
 
 const allowedOrigins = ['http://localhost:3000',
                         'https://projeto-escolar-eta.vercel.app', 
-                        'https://projeto-escolar-eta.vercel.app/cadastrousuario', 
-                        'https://reconhecimento-de-placas.vercel.app/relatorio'
+                        'https://projeto-escolar-eta.vercel.app/cadastrousuario',
 ];
 
 const corsOptions = {
@@ -150,17 +149,13 @@ app.post('/usuarios/recuperar-senha', async (req, res) => {
 const AlunoSchema = new mongoose.Schema({
   nome: String,
   dataNascimento: Date,
-  idade: Number,
   cpf: String,
-  rgIdentidade: String,
   nomePai: String,
   nomeMae: String,
   endereco: String,
   numEndereco: Number,
   cidade: String,
-  estado: String,
   bairro: String,
-  telefone: String,
   celular: String,
   alergia: String,
 });
@@ -172,7 +167,7 @@ app.post('/alunos', async (req, res) => {
   try {
     const novoAluno = new Aluno(req.body);
     const alunoSalvo = await novoAluno.save();
-    res.status(201).json(alunoSalvo);
+    res.status(200).json(alunoSalvo);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao cadastrar aluno' });

@@ -6,17 +6,13 @@ function CadastroAlunos() {
     const [aluno, setAluno] = useState({
         nome: '',
         dataNascimento: '',
-        idade: 0,
         cpf: '',
-        rgIdentidade: '',
         nomePai: '',
         nomeMae: '',
         endereco: '',
         numEndereco: 0,
         cidade: '',
-        estado: '',
         bairro: '',
-        telefone: '',
         celular: '',
         alergia: '',
     });
@@ -34,9 +30,13 @@ function CadastroAlunos() {
 
             console.log('Response:', response);
 
+            if (response.status === 200) {
+                // Cadastro bem-sucedido
+                alert('Aluno cadastrado!');
+            }
+
         } catch (error) {
             console.error('Erro ao cadastrar aluno:', error);
-            // Exibir mensagem de erro ao usuário
         }
     };
 
@@ -45,7 +45,6 @@ function CadastroAlunos() {
         <div className="pagina-principal-sidebar">
             <h2>Menu</h2>
             <ul>
-            {/* Adicionar links conforme necessário */}
             <li>
                 <Link to="/paginaPrincipal">Página Principal</Link>
             </li>
@@ -69,14 +68,9 @@ function CadastroAlunos() {
         <div className="pagina-principal-content">
             <h1>Cadastro de Alunos</h1>
             <form onSubmit={handleSubmit}>
-                {/* Adicione campos do formulário conforme necessário */}
+
                 <label htmlFor="nome">Nome:</label>
-                <input 
-                    type="text" 
-                    name="nome" 
-                    value={aluno.nome} 
-                    onChange={handleChange} required 
-                />
+                <input type="text" name="nome" value={aluno.nome} onChange={handleChange} required />
                 <br />
                 <label htmlFor="dataNascimento">Data de Nascimento:</label>
                 <input type="date" name="dataNascimento" value={aluno.dataNascimento} onChange={handleChange} required />
@@ -86,6 +80,31 @@ function CadastroAlunos() {
                 <br />
                 <label htmlFor="cpf">CPF:</label>
                 <input type="text" name="cpf" value={aluno.cpf} onChange={handleChange} required />
+                <br />
+                <label htmlFor="nomePai">Nome do Pai:</label>
+                <input type="text" name="nomePai" value={aluno.nomePai} onChange={handleChange} />
+                <br />
+                <label htmlFor="nomeMae">Nome da Mãe:</label>
+                <input type="text" name="nomeMae" value={aluno.nomeMae} onChange={handleChange} />
+                <br />
+                <label htmlFor="endereco">Endereço:</label>
+                <input type="text" name="endereco" value={aluno.endereco} onChange={handleChange} />
+                <br />
+                <label htmlFor="numEndereco">Número do Endereço:</label>
+                <input type="number" name="numEndereco" value={aluno.numEndereco} onChange={handleChange} />
+                <br />
+                <label htmlFor="cidade">Cidade:</label>
+                <input type="text" name="cidade" value={aluno.cidade} onChange={handleChange} />
+                <br />
+                <label htmlFor="bairro">Bairro:</label>
+                <input type="text" name="bairro" value={aluno.bairro} onChange={handleChange} />
+                <br />
+                <label htmlFor="celular">Celular:</label>
+                <input type="text" name="celular" value={aluno.celular} onChange={handleChange} />
+                <br />
+                <label htmlFor="alergia">Alergia:</label>
+                <input type="text" name="alergia" value={aluno.alergia} onChange={handleChange} />
+                
                 <br />
                 {/* Outros campos do formulário aqui */}
 
