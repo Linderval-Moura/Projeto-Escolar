@@ -24,7 +24,7 @@ function LoginCadastro() {
     // Lógica para verificar login no backend (substituir com a chamada real à API)
     try {
       // Substituir 'url_do_backend/login' com a URL real de autenticação
-      const response = await axios.post('https:/projeto-escolar-api.onrender.com/usuarios/login', {
+      const response = await axios.post('https://projeto-escolar-api.onrender.com/usuarios/login', {
         email,
         senha,
       });
