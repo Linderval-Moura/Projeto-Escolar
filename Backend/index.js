@@ -12,10 +12,10 @@ const cors = require('cors');
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:3000',
-                        'https://projeto-escolar-eta.vercel.app/', 
-                        'https://projeto-escolar-eta.vercel.app/cadastrousuario', 
-                        'https://reconhecimento-de-placas.vercel.app/relatorio'
+const allowedOrigins = ['http:/localhost:3000',
+                        'https:/projeto-escolar-eta.vercel.app', 
+                        'https:/projeto-escolar-eta.vercel.app/cadastrousuario', 
+                        'https:/reconhecimento-de-placas.vercel.app/relatorio'
 ];
 
 const corsOptions = {
