@@ -39,8 +39,8 @@ function CadastroUsuario() {
 
       if (response.status === 200) {
         // Cadastro bem-sucedido, redirecionar para a página principal
-        alert('Cadastro bem-sucedido!');
-        navigate('/paginaPrincipal');
+        alert('Cadastro bem-sucedido! Faça o Login');
+        navigate('/');
       }
 
     } catch (error) {

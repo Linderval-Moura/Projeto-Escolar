@@ -8,7 +8,7 @@ function LoginCadastro() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [erroLogin, setErroLogin] = useState(false); // Novo estado para controlar a mensagem de erro
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -29,12 +29,28 @@ function LoginCadastro() {
         senha,
       });
 
+      console.log('Response:', response);
+
       if (response.status === 200) {
         // Login bem-sucedido, redirecionar para a página principal
-        history.push('/paginaPrincipal');
+        alert('Login bem-sucedido!');
+        navigate('/paginaPrincipal');
       }
     } catch (error) {
       console.error('Erro ao fazer login:', error);
+
+      if (error.response) {
+        // O servidor respondeu com um status de erro
+        if (error.response.status === 401) {
+          // Código de erro 400: Bad Request
+          alert('Credenciais inválidas!');
+        }
+
+      } else if (error.request) {
+        // A solicitação foi feita, mas não houve resposta do servidor
+        alert('Erro na comunicação com o servidor. Tente novamente mais tarde.');
+      }
+
       setErroLogin(true); // Definir o estado para true em caso de erro
     }
   };
