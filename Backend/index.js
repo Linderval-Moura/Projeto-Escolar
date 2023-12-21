@@ -196,6 +196,57 @@ app.delete('/alunos/:id', async (req, res) => {
   }
 });
 
+// Esquema para a tabela de professores
+const ProfessorSchema = new mongoose.Schema({
+  nome: String,
+  dataNascimento: Date,
+  cpf: String,
+  graduacao: String,
+  estadoCivil: String,
+  endereco: String,
+  numEndereco: Number,
+  cidade: String,
+  bairro: String,
+  celular: String,
+});
+
+const Professor = mongoose.model('Professor', ProfessorSchema);
+
+// Endpoint para cadastrar um novo professor
+app.post('/professores', async (req, res) => {
+  try {
+    const novoProfessor = new Professor(req.body);
+    const professorSalvo = await novoProfessor.save();
+    res.status(200).json(professorSalvo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao cadastrar professor' });
+  }
+});
+
+// Endpoint para atualizar informações de um professor
+app.put('/professores/:id', async (req, res) => {
+  try {
+    const professorAtualizado = await Professor.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(professorAtualizado);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao atualizar professor' });
+  }
+});
+
+// Endpoint para deletar um professor
+app.delete('/professores/:id', async (req, res) => {
+  try {
+    const professorDeletado = await Professor.findByIdAndDelete(req.params.id);
+    res.status(200).json(professorDeletado);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao deletar professor' });
+  }
+});
+
+
 // Rotas
 app.on('pronto', () => {
   const PORT = process.env.PORT || 3002;
