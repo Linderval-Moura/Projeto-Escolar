@@ -1,0 +1,73 @@
+
+.pagina-principal-container {
+    background-color: #333;
+    display: flex;
+}
+
+.pagina-principal-sidebar {
+  background-color: #106877;
+  color: #fff;
+  padding: 20px;
+  min-width: 200px;
+}
+
+.pagina-principal-sidebar h2 {
+  margin-bottom: 10px;
+}
+
+.pagina-principal-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.pagina-principal-sidebar li {
+  margin-bottom: 10px;
+}
+
+.pagina-principal-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.pagina-principal-content h1 {
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #106877;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+.pagina-principal-sidebar a {
+    text-decoration: none;
+    color: white;
+}
+  
+.pagina-principal-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #f6eee0;
+    color: rgb(80, 59, 59);
+}
