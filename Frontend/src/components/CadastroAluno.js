@@ -30,7 +30,7 @@ function CadastroAlunos() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://projeto-escolar-api.onrender.com/alunos', aluno);
+            const response = await axios.post('https:/projeto-escolar-api.onrender.com/alunos', aluno);
 
             console.log('Response:', response);
 
