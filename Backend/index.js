@@ -208,7 +208,7 @@ const ProfessorSchema = new mongoose.Schema({
   cidade: String,
   bairro: String,
   celular: String,
-}, { collection: 'professores' });  // Especifica o nome da coleção
+}, { collection: 'professores' });  // Especificando o nome
 
 const Professor = mongoose.model('Professores', ProfessorSchema);
 
