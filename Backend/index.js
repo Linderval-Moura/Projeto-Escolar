@@ -296,7 +296,7 @@ const DisciplinaSchema = new mongoose.Schema({
   nome: String,
   requisito: String,
   horario: String,
-  cargaHoraria: Number,
+  cargaHoraria: String,
 });
 
 const Disciplina = mongoose.model('Disciplina', DisciplinaSchema);
@@ -360,7 +360,6 @@ app.delete('/disciplinas/:id', async (req, res) => {
     res.status(500).json({ message: 'Erro ao deletar disciplina' });
   }
 });
-
 
 
 // Rotas
