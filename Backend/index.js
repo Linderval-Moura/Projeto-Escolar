@@ -82,14 +82,17 @@ app.post('/usuarios/cadastro', async (req, res) => {
     // Novo usuário
     const novoUsuario = new Usuario({ nome, email, senha });
 
+    // Salva o usuário no banco de dados
+    const usuarioSalvo = await novoUsuario.save();
+
     // Gera um token para o usuário (este token será necessário para recuperar a senha)
     const token = jwt.sign({ userId: usuarioSalvo._id }, process.env.JWT_SECRET); // 'never' significa que o token não expira
 
     // Salva o token no usuário
-    novoUsuario.token = token;
+    usuarioSalvo.token = token;
 
     // Salva o usuário no banco de dados
-    const usuarioSalvo = await novoUsuario.save();
+    await usuarioSalvo.save();
 
     res.status(200).json({ usuario: usuarioSalvo, token });
   } catch (error) {
