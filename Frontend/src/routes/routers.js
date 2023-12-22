@@ -6,11 +6,7 @@ import RecuperarSenha from '../components/RecuperarSenha';
 import PaginaPrincipal from '../components/PaginaPrincipal';
 import CadastroAluno from "../components/CadastroAluno";
 import CadastroProfessor from "../components/CadastroProfessor";
-// import CadastroDisciplina from "../components/CadastroDisciplina";
-// import CadastroFrequencia from "../components/CadastroFrequencia";
-// import CadastroProgramacao from "../components/CadastroProgramacao";
-// import CadastroTurma from "../components/CadastroTurma";
-
+import CadastroDisciplina from "../components/CadastroDisciplina";
 
 export const Routers = () => {
   return (
@@ -22,7 +18,7 @@ export const Routers = () => {
         <Route path="/paginaPrincipal" element={<PaginaPrincipal />} />
         <Route path="/cadastro-alunos" element={<CadastroAluno />} />
         <Route path="/cadastro-professores" element={<CadastroProfessor />} />
-        {/*<Route path="/cadastro/disciplina" element={<CadastroDisciplina />} /> */}
+        <Route path="/cadastro-disciplinas" element={<CadastroDisciplina />} />
         
         {/* Adicionar mais rotas conforme necessário */}
       </Routes>
