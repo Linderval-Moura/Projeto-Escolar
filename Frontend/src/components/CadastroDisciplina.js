@@ -47,9 +47,6 @@ function CadastroDisciplina() {
           <li>
             <Link to="/cadastro-disciplinas">Cadastro de Disciplinas</Link>
           </li>
-          <li>
-            <Link to="/cadastro-frequencia">Cadastro de Frequência</Link>
-          </li>
           <h2></h2>
           <li>
             <Link to="/">Sair e voltar para Login</Link>
