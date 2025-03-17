@@ -13,9 +13,8 @@ const cors = require('cors');
 const app = express();
 
 const allowedOrigins = ['http://localhost:3000',
-                        'https://reconhecimento-de-placas.vercel.app', 
-                        'https://reconhecimento-de-placas.vercel.app/consulta', 
-                        'https://reconhecimento-de-placas.vercel.app/relatorio'
+                        'https://projeto-escolar-eta.vercel.app', 
+                        'https://projeto-escolar-eta.vercel.app/cadastrousuario'
 ];
 
 const corsOptions = {
@@ -61,6 +60,7 @@ const UsuarioSchema = new mongoose.Schema({
   nome: String,
   email: String,
   senha: String,
+  token: String,
 });
 
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
@@ -81,14 +81,20 @@ app.post('/usuarios/cadastro', async (req, res) => {
 
     // Novo usuário
     const novoUsuario = new Usuario({ nome, email, senha });
-    
+
     // Salva o usuário no banco de dados
     const usuarioSalvo = await novoUsuario.save();
 
     // Gera um token para o usuário (este token será necessário para recuperar a senha)
-    const token = jwt.sign({ userId: usuarioSalvo._id }, process.env.JWT_SECRET, { expiresIn: 'never' }); // 'never' significa que o token não expira
+    const token = jwt.sign({ userId: usuarioSalvo._id }, process.env.JWT_SECRET); // 'never' significa que o token não expira
 
-    res.status(201).json({ usuario: usuarioSalvo, token });
+    // Salva o token no usuário
+    usuarioSalvo.token = token;
+
+    // Salva o usuário no banco de dados
+    await usuarioSalvo.save();
+
+    res.status(200).json({ usuario: usuarioSalvo, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao cadastrar usuário' });
@@ -146,32 +152,50 @@ app.post('/usuarios/recuperar-senha', async (req, res) => {
 const AlunoSchema = new mongoose.Schema({
   nome: String,
   dataNascimento: Date,
-  idade: Number,
   cpf: String,
-  rgIdentidade: String,
   nomePai: String,
   nomeMae: String,
   endereco: String,
   numEndereco: Number,
   cidade: String,
-  estado: String,
   bairro: String,
-  telefone: String,
   celular: String,
   alergia: String,
 });
 
-const Aluno = mongoose.model('Aluno', AlunoSchema);
+const Aluno = mongoose.model('Alunos', AlunoSchema);
 
 // Endpoint para cadastrar um novo aluno
 app.post('/alunos', async (req, res) => {
   try {
     const novoAluno = new Aluno(req.body);
     const alunoSalvo = await novoAluno.save();
-    res.status(201).json(alunoSalvo);
+    res.status(200).json(alunoSalvo);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao cadastrar aluno' });
+  }
+});
+
+// Endpoint para listar todos os alunos
+app.get('/alunos', async (req, res) => {
+  try {
+    const alunos = await Aluno.find();
+    res.status(200).json(alunos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter alunos' });
+  }
+});
+
+// Endpoint para obter detalhes de um aluno específico
+app.get('/alunos/:id', async (req, res) => {
+  try {
+    const aluno = await Aluno.findById(req.params.id);
+    res.status(200).json(aluno);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter detalhes de aluno' });
   }
 });
 
@@ -196,6 +220,150 @@ app.delete('/alunos/:id', async (req, res) => {
     res.status(500).json({ message: 'Erro ao deletar aluno' });
   }
 });
+
+// Esquema para a tabela de professores
+const ProfessorSchema = new mongoose.Schema({
+  nome: String,
+  dataNascimento: Date,
+  cpf: String,
+  graduacao: String,
+  estadoCivil: String,
+  endereco: String,
+  numEndereco: Number,
+  cidade: String,
+  bairro: String,
+  celular: String,
+}, { collection: 'professores' });  // Especificando o nome
+
+const Professor = mongoose.model('Professores', ProfessorSchema);
+
+// Endpoint para cadastrar um novo professor
+app.post('/professores', async (req, res) => {
+  try {
+    const novoProfessor = new Professor(req.body);
+    const professorSalvo = await novoProfessor.save();
+    res.status(200).json(professorSalvo);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao cadastrar professor' });
+  }
+});
+
+// Endpoint para listar todos os professores
+app.get('/professores', async (req, res) => {
+  try {
+    const professores = await Professor.find();
+    res.status(200).json(professores);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter professores' });
+  }
+});
+
+// Endpoint para obter detalhes de um professor específico
+app.get('/professores/:id', async (req, res) => {
+  try {
+    const professor = await Professor.findById(req.params.id);
+    res.status(200).json(professor);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter detalhes de professor' });
+  }
+});
+
+// Endpoint para atualizar informações de um professor
+app.put('/professores/:id', async (req, res) => {
+  try {
+    const professorAtualizado = await Professor.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.status(200).json(professorAtualizado);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao atualizar professor' });
+  }
+});
+
+// Endpoint para deletar um professor
+app.delete('/professores/:id', async (req, res) => {
+  try {
+    const professorDeletado = await Professor.findByIdAndDelete(req.params.id);
+    res.status(200).json(professorDeletado);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao deletar professor' });
+  }
+});
+
+
+// Esquema para a tabela de disciplinas
+const DisciplinaSchema = new mongoose.Schema({
+  nome: String,
+  requisito: String,
+  horario: String,
+  cargaHoraria: String,
+});
+
+const Disciplina = mongoose.model('Disciplina', DisciplinaSchema);
+
+// Endpoint para cadastrar uma nova disciplina
+app.post('/disciplinas', async (req, res) => {
+  try {
+    const novaDisciplina = new Disciplina(req.body);
+    const disciplinaSalva = await novaDisciplina.save();
+    res.status(200).json(disciplinaSalva);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao cadastrar disciplina' });
+  }
+});
+
+// Endpoint para listar todas as disciplinas
+app.get('/disciplinas', async (req, res) => {
+  try {
+    const disciplinas = await Disciplina.find();
+    res.status(200).json(disciplinas);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter disciplinas' });
+  }
+});
+
+// Endpoint para obter detalhes de uma disciplina específica
+app.get('/disciplinas/:id', async (req, res) => {
+  try {
+    const disciplina = await Disciplina.findById(req.params.id);
+    res.status(200).json(disciplina);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao obter detalhes da disciplina' });
+  }
+});
+
+// Endpoint para atualizar informações de uma disciplina
+app.put('/disciplinas/:id', async (req, res) => {
+  try {
+    const disciplinaAtualizada = await Disciplina.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(disciplinaAtualizada);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao atualizar disciplina' });
+  }
+});
+
+// Endpoint para deletar uma disciplina
+app.delete('/disciplinas/:id', async (req, res) => {
+  try {
+    const disciplinaDeletada = await Disciplina.findByIdAndDelete(req.params.id);
+    res.status(200).json(disciplinaDeletada);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao deletar disciplina' });
+  }
+});
+
 
 // Rotas
 app.on('pronto', () => {
