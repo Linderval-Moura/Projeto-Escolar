@@ -5,6 +5,7 @@ uploads
 .env.test
 .sequelizerc
 indexcopy.js
+index.js
 PlacaModel.js
 20231005171613-create-placas.js
 config.js
