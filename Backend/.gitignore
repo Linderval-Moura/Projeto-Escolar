@@ -6,6 +6,7 @@ uploads
 .sequelizerc
 indexcopy.js
 index.js
+index.html
 PlacaModel.js
 20231005171613-create-placas.js
 config.js
