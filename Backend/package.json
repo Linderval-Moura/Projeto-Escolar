@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npm-run-all --parallel server start",
-    "start": "turbowatch index.js",
+    "start": "turbowatch src/server.js",
     "server": "json-server data/db.json",
     "vercel": "npm install"
   },
