@@ -10,8 +10,8 @@
   background-color: #106877;
   color: #fff;
   padding: 20px;
-  min-width: 200px;
-  margin: 100 auto;
+  min-width: 250px;
+  height: 100vh;
 }
 
 .pagina-principal-sidebar h2 {
@@ -66,6 +66,8 @@ button:hover {
 .pagina-principal-sidebar a {
     text-decoration: none;
     color: white;
+    display: block;
+    padding: 10px 0;
 }
   
 .pagina-principal-content {
@@ -73,4 +75,9 @@ button:hover {
     padding: 20px;
     background-color: #f6eee0;
     color: rgb(80, 59, 59);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
 }
